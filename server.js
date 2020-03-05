@@ -9,8 +9,8 @@ plugdj.eventListeners(client);
 client.on('ready', () => { console.log('ready!') });
 client.on('message', msg => {
 	if (!msg.content.startsWith(tokens.prefix) || msg.author.bot) return;
-	const ARGS = msg.content.slice(tokens.prefix.length).trim().toLowerCase().split(/ +/g)
-	const msgContent = {ARGS, msg, client}
+	const args = msg.content.slice(tokens.prefix.length).trim().toLowerCase().split(/ +/g)
+	const msgContent = {args, msg, client}
 	commands.command(msgContent)
 });
 client.login(tokens.secretToken);

@@ -18,6 +18,9 @@
   "homepage": "https://github.com/jrshutske/lukeisbeans#readme",
   "dependencies": {
     "discord.js": "latest",
+    "image-downloader": "^3.5.0",
+    "jimp": "^0.9.5",
+    "node-fetch": "^2.6.0",
     "plugapi": "^5.1.0"
   }
 }
