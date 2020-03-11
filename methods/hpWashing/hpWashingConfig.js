@@ -1,7 +1,7 @@
 const resolveJob = (job) => {
   switch(job) {
     case "beginner":
-      ({ minHpGain: 8, maxHpGain:12, mpLoss: 6, minMpMultiplier: 10, minMpAdd: 2 })
+      return ({ minHpGain: 8, maxHpGain:12, mpLoss: 6, minMpMultiplier: 10, minMpAdd: 2 })
     case "spearman":
       return { minHpGain: 50, maxHpGain:55, mpLoss: 4, minMpMultiplier: 4, minMpAdd:156}
     case "fighter":
