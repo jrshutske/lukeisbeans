@@ -10,6 +10,14 @@ const main = (msgContent) => {
     msgContent.msg.channel.send("Valid Jobs: beginner, spearman, fighter, page, thief, bowman, magician, pirate");
     return;
   }
+  if (!level || isNaN(level)) {
+    msgContent.msg.channel.send("Please enter a valid level.");
+    return;
+  }
+  if (!mp || isNaN(mp)) {
+    msgContent.msg.channel.send("Please enter a valid MP amount.");
+    return;
+  }
   let minMp = config.minMpMultiplier*level+config.minMpAdd;
   let extraMp = mp - minMp;
   let numberOfWashes = Math.ceil(extraMp/config.mpLoss);

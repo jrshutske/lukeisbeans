@@ -1,5 +1,6 @@
 const { 
-  beansImage,
+  thumbnailImage,
+  inviteImage,
   peasantImage,
   regularInviteLink,
   adminInviteLink } = require('../config.json');
@@ -9,16 +10,16 @@ const Discord = require('discord.js');
 // inside a command, event listener, etc.
 const exampleEmbed = new Discord.RichEmbed()
 	.setColor('#af1313')
-	.setTitle('Invite Beans')
+	.setTitle('Invite Chief Gray')
 	.setURL(regularInviteLink)
-	.setAuthor('lukeisbeans')
-	.setDescription(`[Make Beans an Administrator](${adminInviteLink})`)
-  .setThumbnail(beansImage)
-  .setImage("https://media2.giphy.com/media/NrjmOUb2h3uta/source.gif")
+	.setDescription(`[Make Chief Gray an Administrator](${adminInviteLink})`)
+  .setThumbnail(thumbnailImage)
+  .setImage(inviteImage)
 	.setTimestamp(new Date().toUTCString())
 	.setFooter('Powered by Peasant', peasantImage);
 
 const main = (msgContent) => {
   msgContent.msg.channel.send(exampleEmbed)
 }
+
 module.exports.main = main;

@@ -28,7 +28,15 @@ const createString = ({
   unluckyHp,
   requiredNx,
   voteDays
-}) => (`
+}) => {
+return numberOfWashes < 1 
+?
+(`
+You have ${extraMp} extra MP.
+You don't have enough MP to wash.
+`)
+:
+(`
 You have ${extraMp} extra MP.
 You can wash ${numberOfWashes} times.
 If you're lucky you will gain ${luckyHp} HP.
@@ -36,6 +44,7 @@ If you're unlucky you will gain ${unluckyHp} HP.
 The cost of ${numberOfWashes} AP resets is: ${requiredNx} NX. 
 (${voteDays} days of voting)
 `)
+}
 
 module.exports.resolveJob = resolveJob;
 module.exports.createString = createString;

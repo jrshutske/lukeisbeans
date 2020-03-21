@@ -1,16 +1,19 @@
 const Jimp = require('jimp');
 const fetch = require('node-fetch');
 const download = require('image-downloader')
+const logger = require('./helpers/logger.js')
 
 const getInfo = async (characterName) => {
-  console.info('\x1b[36m%s\x1b[0m', `Fetching: ${characterName}`, '\x1b[0m');
+  logger.info(`Fetching: ${characterName}...`);
   try {
     let response = await fetch(`https://maplelegends.com/api/character?name=${characterName}`);
     let charaterData = await response.json();
     let characterDest = await downloadImage(`https://maplelegends.com/api/getavatar?name=${characterName}`);
+    logger.success(`${characterName} Fetched Successfully`);
+    
     return await createImage(characterDest, charaterData);
   } catch(e) {
-    console.error("\x1b[35m", "Player Could Not Fetched", '\x1b[0m');
+    logger.error("Player Could Not Fetched")
     return;
   }
 }
@@ -21,7 +24,7 @@ async function downloadImage(url) {
     await download.image({url, dest})
     return dest;
   } catch (e) {
-    console.error("\x1b[35m", "Download Image Failed", '\x1b[0m')
+    logger.error("Download Image Failed")
     return
   }
 }
@@ -32,9 +35,9 @@ async function createImage(characterDest, charaterData) {
     let backgroundImage = await Jimp.read('images/temp/leafre.jpg');
     let greyRect = await Jimp.read('images/temp/greyRect.png');
     let font = await Jimp.loadFont(Jimp.FONT_SANS_32_WHITE)
-    characterImage.resize(200, 200)
+    characterImage.resize(Jimp.AUTO, 200)
     backgroundImage.crop(0, 200, 600, 400)
-    greyRect.resize(290, 380)
+    greyRect.resize(300, 380)
     greyRect.brightness(-.8)
     greyRect.opacity(.8)
     greyRect.print(font, 20, 30, charaterData.name)
@@ -50,13 +53,13 @@ async function createImage(characterDest, charaterData) {
     await backgroundImage.write('images/temp/newCharacter.png')
     return 'images/temp/newCharacter.png'
   } catch(e){
-    console.error("\x1b[35m", "Problem Creating Image", '\x1b[0m') 
+    logger.error("Problem Creating Image") 
     return
   }
 }
 const main = async (msgContent) => {
   if (!msgContent.args[1]) {
-    console.info("\x1b[35m", "User did not provide a name.", '\x1b[0m')
+    logger.info("User did not provide a name.")
     msgContent.msg.channel.send(`Please provide a name`);
   } else {
     let createdImage = await getInfo(msgContent.args[1]);
